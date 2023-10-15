@@ -1,11 +1,13 @@
 package edu.hw1;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task4Test {
 
     @Test
+    @DisplayName("Обычная отработка метода")
     void fixString1() {
         // given
         String s = "123456";
@@ -18,6 +20,7 @@ public class Task4Test {
     }
 
     @Test
+    @DisplayName("Обычная отработка метода")
     void fixString2() {
         // given
         String s = "badce";
@@ -30,6 +33,7 @@ public class Task4Test {
     }
 
     @Test
+    @DisplayName("Обычная отработка метода")
     void fixString3() {
         // given
         String s = "hTsii  s aimex dpus rtni.g";
@@ -42,6 +46,7 @@ public class Task4Test {
     }
 
     @Test
+    @DisplayName("Введена пустая строка")
     void fixEmptyString() {
         // given
         String s = "";

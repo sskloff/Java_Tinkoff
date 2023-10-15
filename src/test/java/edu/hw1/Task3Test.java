@@ -1,11 +1,13 @@
 package edu.hw1;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task3Test {
     @Test
+    @DisplayName("Положительная отработка метода")
     void whenFirstArrayCanBeNestedThenResultTrue1() {
         // given
         int[] array1 = {1, 2, 3, 4};
@@ -19,6 +21,7 @@ public class Task3Test {
     }
 
     @Test
+    @DisplayName("Положительная отработка метода")
     void whenFirstArrayCanBeNestedThenResultTrue2() {
         // given
         int[] array1 = {3, 1};
@@ -32,6 +35,7 @@ public class Task3Test {
     }
 
     @Test
+    @DisplayName("Отрицательная отработка метода")
     void whenFirstArrayCantBeNestedThenResultFalse1() {
         // given
         int[] array1 = {9, 9, 8};
@@ -45,6 +49,7 @@ public class Task3Test {
     }
 
     @Test
+    @DisplayName("Отрицательная отработка метода")
     void whenFirstArrayCantBeNestedThenResultFalse2() {
         // given
         int[] array1 = {1, 2, 3, 4};

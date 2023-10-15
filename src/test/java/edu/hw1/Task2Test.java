@@ -1,10 +1,12 @@
 package edu.hw1;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task2Test {
     @Test
+    @DisplayName("Обычная отработка метода")
     void when4666ThenResult4() {
         // given
         int number = 4666;
@@ -17,6 +19,7 @@ public class Task2Test {
     }
 
     @Test
+    @DisplayName("Обычная отработка метода")
     void when544ThenResult3() {
         // given
         int number = 544;
@@ -29,6 +32,7 @@ public class Task2Test {
     }
 
     @Test
+    @DisplayName("Отработка с нулем")
     void when0ThenResult1() {
         // given
         int number = 0;
@@ -41,6 +45,7 @@ public class Task2Test {
     }
 
     @Test
+    @DisplayName("Отработка с отрицательным числом")
     void whenMinus25ThenResult2() {
         // given
         int number = -25;

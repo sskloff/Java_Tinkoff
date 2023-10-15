@@ -1,5 +1,7 @@
 package edu.hw1;
 
+import java.util.Objects;
+
 public class Task1 {
 
     private Task1() {
@@ -10,6 +12,9 @@ public class Task1 {
     public static int minutesToSeconds(String time) {
         int secondsFromMinutes;
         int seconds;
+        if (Objects.isNull(time)) {
+            return -1;
+        }
         String[] numbers = time.split(":");
         try {
             secondsFromMinutes = Integer.parseInt(numbers[0]) * SECONDS_IN_MINUTE;

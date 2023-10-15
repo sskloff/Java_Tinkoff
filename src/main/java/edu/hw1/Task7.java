@@ -29,6 +29,9 @@ public class Task7 {
         int m = 0;
         int tmp = n;
         int localShift = shift;
+        if (n <= 0) {
+            return -1;
+        }
         while (tmp != 0) {
             tmp /= 2;
             m += 1;
