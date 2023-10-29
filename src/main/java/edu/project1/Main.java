@@ -1,27 +1,48 @@
 package edu.project1;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public final class Main {
-    private final static Logger LOGGER = LogManager.getLogger();
+
+    static Scanner scanner = new Scanner(System.in);
 
     private Main() {
     }
 
+    @SuppressWarnings({"RegexpSinglelineJava"})
+    public static char input() {
+        String input;
+        do {
+            try {
+                input = scanner.nextLine().toLowerCase();
+                if (input.length() != 1) {
+                    System.out.println("Пустой ввод или введено несколько символов. Повторите попытку");
+                }
+            } catch (NoSuchElementException e) {
+                System.out.println("Ввод прерван");
+                scanner.close();
+                return '#';
+            }
+        } while (input.length() != 1);
+        return input.charAt(0);
+    }
+
+    @SuppressWarnings({"RegexpSinglelineJava"})
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        LOGGER.info("Hello and welcome!");
-
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 0; i <= 2; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            LOGGER.info("i = {}", i);
+        ArrayList<String> dictionary = Dictionary.loadDictionary();
+        while (true) {
+            System.out.println("Для начала новой партии введите (N)\n"
+                + "Для выхода из игры введите (#)");
+            char input = input();
+            if (input == 'n') {
+                Game.run(dictionary);
+            } else if (input == '#') {
+                break;
+            } else {
+                System.out.println("Введен некорректный символ, повторите попытку");
+            }
         }
     }
 }
