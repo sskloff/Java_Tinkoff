@@ -12,6 +12,7 @@ public class Project1Test {
     @DisplayName("Отработка открытия буквы и завершения игры победой")
     void openCharAndThenWinTest() {
         // given
+        ArrayList<String> dictionary = Dictionary.loadDictionary();
         HashSet<Character> usedChar = new HashSet<>();
         usedChar.add('а');
         usedChar.add('л');
@@ -19,20 +20,18 @@ public class Project1Test {
         usedChar.add('е');
         usedChar.add('р');
         Gallows gallows = Gallows.valueOf(Game.STEPS[2]);
-        Game testGame = new Game(
-            0, false, usedChar,
-            "алгебра", "алге*ра", gallows
-        );
+        Game testGame = Game.fabricGameCreator(dictionary, 0, false,
+            usedChar, "алгебра", "алге*ра", gallows);
 
         // when
-        int code = Game.guessChar(testGame, 'б');
-        int gameResult = Game.turnResult(testGame);
+        TurnResult turnResult = Game.guessChar(testGame, 'б');
+        GameResult gameResult = Game.turnResult(testGame);
 
         // then
         assertEquals("алгебра", testGame.guessedWord); // Изменение состояния отгаданного слова
         assertEquals(6, testGame.usedChar.size()); // Расширение использованных букв
-        assertEquals(1, code); // Код 1 - статус "отгадана буква"
-        assertEquals(1, gameResult); // Код 1 - статус "победа"
+        assertEquals(TurnResult.letterOpens, turnResult);
+        assertEquals(GameResult.win, gameResult);
     }
 
     @Test
@@ -49,18 +48,16 @@ public class Project1Test {
         usedChar.add('r');
         usedChar.add('z');
         Gallows gallows = Gallows.valueOf(Game.STEPS[6]);
-        Game testGame = new Game(
-            6, false, usedChar,
-            "арестант", "а****а**", gallows
-        );
+        Game testGame = Game.fabricGameCreator(dictionary, 6, false,
+            usedChar, "арестант", "а****а**", gallows);
 
         // when
-        int code = Game.guessChar(testGame, 'я');
-        int gameResult = Game.turnResult(testGame);
+        TurnResult turnResult = Game.guessChar(testGame, 'я');
+        GameResult gameResult = Game.turnResult(testGame);
         // then
         assertEquals("а****а**", testGame.guessedWord);
-        assertEquals(3, code); // Код 3 - статус "введена неправильная буква"
-        assertEquals(0, gameResult); // Код 0 - статус "поражение"
+        assertEquals(TurnResult.wrongLetterEntered, turnResult);
+        assertEquals(GameResult.lose, gameResult);
 
         // when
         testGame = new Game(dictionary);
@@ -73,51 +70,66 @@ public class Project1Test {
     @DisplayName("Отработка полноценной игры")
     void fullGameTest() {
         // given
+        ArrayList<String> dictionary = Dictionary.loadDictionary();
         Gallows gallows = Gallows.valueOf(Game.STEPS[0]);
-        Game testGame = new Game(
-            0, false, new HashSet<>(),
-            "стоп", "****", gallows
-        );
+        Game testGame = Game.fabricGameCreator(dictionary, 0, false,
+            new HashSet<>(), "стоп", "****", gallows);
 
         // when
-        int code = Game.guessChar(testGame, 'с');
-        int gameResult = Game.turnResult(testGame);
+        TurnResult turnResult = Game.guessChar(testGame, 'с');
+        GameResult gameResult = Game.turnResult(testGame);
         // then
-        assertEquals(1, code); // Код 1 - статус "отгадана буква"
-        assertEquals(2, gameResult); // Код 2 - статус "игра продолжается"
+        assertEquals(TurnResult.letterOpens, turnResult);
+        assertEquals(GameResult.gameContinues, gameResult);
 
 
         // when
-        code = Game.guessChar(testGame, 'т');
+        turnResult = Game.guessChar(testGame, 'т');
         gameResult = Game.turnResult(testGame);
         // then
-        assertEquals(1, code); // Код 1 - статус "отгадана буква"
-        assertEquals(2, gameResult); // Код 2 - статус "игра продолжается"
+        assertEquals(TurnResult.letterOpens, turnResult);
+        assertEquals(GameResult.gameContinues, gameResult);
 
 
         // when
-        code = Game.guessChar(testGame, 'е');
+        turnResult = Game.guessChar(testGame, 'е');
         gameResult = Game.turnResult(testGame);
         // then
-        assertEquals(3, code); // Код 3 - статус "введена неправильная буква"
-        assertEquals(2, gameResult); // Код 2 - статус "игра продолжается"
+        assertEquals(TurnResult.wrongLetterEntered, turnResult);
+        assertEquals(GameResult.gameContinues, gameResult);
 
 
         // when
-        code = Game.guessChar(testGame, 'о');
+        turnResult = Game.guessChar(testGame, 'о');
         gameResult = Game.turnResult(testGame);
         // then
-        assertEquals(1, code); // Код 1 - статус "отгадана буква"
-        assertEquals(2, gameResult); // Код 2 - статус "игра продолжается"
+        assertEquals(TurnResult.letterOpens, turnResult);
+        assertEquals(GameResult.gameContinues, gameResult);
 
 
         // when
-        code = Game.guessChar(testGame, 'п');
+        turnResult = Game.guessChar(testGame, 'п');
         gameResult = Game.turnResult(testGame);
         // then
-        assertEquals(1, code); // Код 1 - статус "отгадана буква"
-        assertEquals(1, gameResult); // Код 1 - статус "победа"
+        assertEquals(TurnResult.letterOpens, turnResult);
+        assertEquals(GameResult.win, gameResult);
         assertEquals("стоп", testGame.guessedWord); // Изменение состояния отгаданного слова
         assertEquals(5, testGame.usedChar.size()); // Расширение использованных букв
+    }
+
+    @Test
+    @DisplayName("Прерывание игры")
+    void gameInterruptionTest() {
+        // given
+        ArrayList<String> dictionary = Dictionary.loadDictionary();
+        Gallows gallows = Gallows.valueOf(Game.STEPS[0]);
+        Game testGame = Game.fabricGameCreator(dictionary, 0, false,
+            new HashSet<>(), "стоп", "****", gallows);
+
+        // when
+        TurnResult turnResult = Game.guessChar(testGame, '#');
+
+        // then
+        assertEquals(TurnResult.gameInterrupted, turnResult);
     }
 }

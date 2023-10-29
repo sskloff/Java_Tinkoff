@@ -23,17 +23,18 @@ public class Game {
         this.gallows = Gallows.valueOf(STEPS[mistakeCount]);
     }
 
-    public Game(// Перегруженный конструктор для тестирования
-        int mistakeCount, boolean winnerStatus,
-        HashSet<Character> usedChar, String hiddenWord,
-        String guessedWord, Gallows gallows
-    ) {
-        this.mistakeCount = mistakeCount;
-        this.winnerStatus = winnerStatus;
-        this.usedChar = usedChar;
-        this.hiddenWord = hiddenWord;
-        this.guessedWord = guessedWord;
-        this.gallows = gallows;
+    public static Game fabricGameCreator(ArrayList<String> dictionary, int mistakeCount,
+        boolean winnerStatus, HashSet<Character> usedChar, String hiddenWord,
+        String guessedWord, Gallows gallows) {
+        Game game = new Game(dictionary);
+
+        game.mistakeCount = mistakeCount;
+        game.winnerStatus = winnerStatus;
+        game.usedChar = usedChar;
+        game.hiddenWord = hiddenWord;
+        game.guessedWord = guessedWord;
+        game.gallows = gallows;
+        return game;
     }
 
     public static String openChar(Game thisGame, char input) {
@@ -49,47 +50,49 @@ public class Game {
         return thisGame.guessedWord;
     }
 
-    @SuppressWarnings("MagicNumber")
-    public static int guessChar(Game thisGame, char input) {
+    @SuppressWarnings("ReturnCount")
+    public static TurnResult guessChar(Game thisGame, char input) {
+        if (input == '#') {
+            return TurnResult.gameInterrupted;
+        }
         if (thisGame.hiddenWord.contains(String.valueOf(input))) {
             if (thisGame.usedChar.contains(input)) {
-                return 0; // Ранее буква была отгадана
+                return TurnResult.letterWasGuessedPreviously;
             } else {
                 thisGame.guessedWord = openChar(thisGame, input);
                 if (!thisGame.guessedWord.contains("*")) {
                     thisGame.winnerStatus = true;
                 }
-                return 1; // Была открыта буква
+                return TurnResult.letterOpens;
             }
         } else {
             if (thisGame.usedChar.contains(input)) {
-                return 2; // Ранее эта неправильная буква вводилась
+                return TurnResult.wrongLetterWasEnteredPreviously;
             } else {
                 thisGame.usedChar.add(input);
                 thisGame.mistakeCount++;
-                return 3; // Введена неправильная буква
+                return TurnResult.wrongLetterEntered;
             }
         }
     }
 
-    @SuppressWarnings("MagicNumber")
-    public static int turnResult(Game thisGame) {
+    public static GameResult turnResult(Game thisGame) {
         thisGame.gallows = Gallows.valueOf(STEPS[thisGame.mistakeCount]);
         if (thisGame.mistakeCount == MISTAKE_MAX) {
             thisGame.winnerStatus = true;
-            return 0; // Поражение
+            return GameResult.lose;
         } else if (thisGame.winnerStatus) {
-            return 1; // Победа
+            return GameResult.win;
         }
-        return 2; // Игра продолжается
+        return GameResult.gameContinues;
     }
 
-    @SuppressWarnings({"MagicNumber", "RegexpSinglelineJava"})
+    @SuppressWarnings("RegexpSinglelineJava")
     public static void run(ArrayList<String> dictionary) {
-        System.out.println("\nНажмите Ctrl+D, чтобы сдаться");
+        System.out.println("\nВведите (#), чтобы сдаться");
         Game thisGame = new Game(dictionary);
-        int guessCode;
-        int gameResult;
+        TurnResult turnResult;
+        GameResult gameStatus;
         while (!thisGame.winnerStatus) {
             System.out.println(thisGame.gallows);
             System.out.println("Загаданное слово: " + thisGame.guessedWord);
@@ -97,20 +100,20 @@ public class Game {
             System.out.println("Вы уже вводили буквы: " + thisGame.usedChar);
             System.out.print("Введите букву: ");
             char input = Main.input();
-            if (input == '#') {
-                System.exit(3);
+            turnResult = guessChar(thisGame, input);
+            if (turnResult.equals(TurnResult.gameInterrupted)) {
+                System.exit(0);
             }
-            guessCode = guessChar(thisGame, input);
-            if (guessCode == 0) {
+            if (turnResult.equals(TurnResult.letterWasGuessedPreviously)) {
                 System.out.println("\nРанее Вы уже угадывали эту буквы");
-            } else if (guessCode == 2) {
+            } else if (turnResult.equals(TurnResult.wrongLetterWasEnteredPreviously)) {
                 System.out.println("\nБезумие - это повторение одних и тех же действий "
                     + "раз за разом, в надежде на изменение :^)");
             }
-            gameResult = turnResult(thisGame);
-            if (gameResult == 1) {
+            gameStatus = turnResult(thisGame);
+            if (gameStatus.equals(GameResult.win)) {
                 System.out.println("\nВЫ ВЫИГРАЛИ!!!\n");
-            } else if (gameResult == 0) {
+            } else if (gameStatus.equals(GameResult.lose)) {
                 System.out.println(thisGame.gallows);
                 System.out.println("Поздравляем! Вы - вишня :^)");
                 System.out.println("Было загадано слово " + thisGame.hiddenWord + "\n");
