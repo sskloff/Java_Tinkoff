@@ -23,17 +23,18 @@ public class Game {
         this.gallows = Gallows.valueOf(STEPS[mistakeCount]);
     }
 
-    public Game(// Перегруженный конструктор для тестирования
-        int mistakeCount, boolean winnerStatus,
-        HashSet<Character> usedChar, String hiddenWord,
-        String guessedWord, Gallows gallows
-    ) {
-        this.mistakeCount = mistakeCount;
-        this.winnerStatus = winnerStatus;
-        this.usedChar = usedChar;
-        this.hiddenWord = hiddenWord;
-        this.guessedWord = guessedWord;
-        this.gallows = gallows;
+    public static Game fabricGameCreator(ArrayList<String> dictionary, int mistakeCount,
+        boolean winnerStatus, HashSet<Character> usedChar, String hiddenWord,
+        String guessedWord, Gallows gallows) {
+        Game game = new Game(dictionary);
+
+        game.mistakeCount = mistakeCount;
+        game.winnerStatus = winnerStatus;
+        game.usedChar = usedChar;
+        game.hiddenWord = hiddenWord;
+        game.guessedWord = guessedWord;
+        game.gallows = gallows;
+        return game;
     }
 
     public static String openChar(Game thisGame, char input) {

@@ -12,6 +12,7 @@ public class Project1Test {
     @DisplayName("Отработка открытия буквы и завершения игры победой")
     void openCharAndThenWinTest() {
         // given
+        ArrayList<String> dictionary = Dictionary.loadDictionary();
         HashSet<Character> usedChar = new HashSet<>();
         usedChar.add('а');
         usedChar.add('л');
@@ -19,10 +20,8 @@ public class Project1Test {
         usedChar.add('е');
         usedChar.add('р');
         Gallows gallows = Gallows.valueOf(Game.STEPS[2]);
-        Game testGame = new Game(
-            0, false, usedChar,
-            "алгебра", "алге*ра", gallows
-        );
+        Game testGame = Game.fabricGameCreator(dictionary, 0, false,
+            usedChar, "алгебра", "алге*ра", gallows);
 
         // when
         TurnResult turnResult = Game.guessChar(testGame, 'б');
@@ -49,10 +48,8 @@ public class Project1Test {
         usedChar.add('r');
         usedChar.add('z');
         Gallows gallows = Gallows.valueOf(Game.STEPS[6]);
-        Game testGame = new Game(
-            6, false, usedChar,
-            "арестант", "а****а**", gallows
-        );
+        Game testGame = Game.fabricGameCreator(dictionary, 6, false,
+            usedChar, "арестант", "а****а**", gallows);
 
         // when
         TurnResult turnResult = Game.guessChar(testGame, 'я');
@@ -73,11 +70,10 @@ public class Project1Test {
     @DisplayName("Отработка полноценной игры")
     void fullGameTest() {
         // given
+        ArrayList<String> dictionary = Dictionary.loadDictionary();
         Gallows gallows = Gallows.valueOf(Game.STEPS[0]);
-        Game testGame = new Game(
-            0, false, new HashSet<>(),
-            "стоп", "****", gallows
-        );
+        Game testGame = Game.fabricGameCreator(dictionary, 0, false,
+            new HashSet<>(), "стоп", "****", gallows);
 
         // when
         TurnResult turnResult = Game.guessChar(testGame, 'с');
@@ -125,11 +121,10 @@ public class Project1Test {
     @DisplayName("Прерывание игры")
     void gameInterruptionTest() {
         // given
+        ArrayList<String> dictionary = Dictionary.loadDictionary();
         Gallows gallows = Gallows.valueOf(Game.STEPS[0]);
-        Game testGame = new Game(
-            0, false, new HashSet<>(),
-            "стоп", "****", gallows
-        );
+        Game testGame = Game.fabricGameCreator(dictionary, 0, false,
+            new HashSet<>(), "стоп", "****", gallows);
 
         // when
         TurnResult turnResult = Game.guessChar(testGame, '#');
