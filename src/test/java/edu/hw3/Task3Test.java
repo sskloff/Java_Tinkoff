@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Task3Test {
 
     @Test
-    @DisplayName("Числа")
-    void integerTest() {
+    @DisplayName("Передан массив из целых чисел")
+    void freqDictWhenEnteredListOfIntegers() {
         //given
         List<Integer> input = Arrays.asList(1, 2, 3, 1, 2, 2);
         Map<Integer, Integer> expected = Map.of(1, 2, 2, 3, 3, 1);
@@ -25,8 +25,8 @@ public class Task3Test {
     }
 
     @Test
-    @DisplayName("Строки")
-    void stringsTest() {
+    @DisplayName("Передан массив строк")
+    void freqDictWhenEnteredListOfStrings() {
         //given
         List<String> input = Arrays.asList("a", "bb", "c", "a", "bb", "bb");
         Map<String, Integer> expected = Map.of("a", 2, "bb", 3, "c", 1);

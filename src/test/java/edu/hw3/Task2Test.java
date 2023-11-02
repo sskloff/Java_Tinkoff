@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class Task2Test {
     @Test
     @DisplayName("Введена корректная строка")
-    void enteredCorrectString() {
+    void clusterizeWhenEnteredCorrectString() {
         //given
         String input = "(()())()((()))()(())";
         List<String> expected = Arrays.asList("(()())", "()", "((()))", "()", "(())");
@@ -24,7 +24,7 @@ public class Task2Test {
 
     @Test
     @DisplayName("Введена некорректная строка")
-    void enteredIncorrectString() {
+    void clusterizeWhenEnteredIncorrectStringThenNull() {
         //given
         String input = ")(()";
 
@@ -37,7 +37,7 @@ public class Task2Test {
 
     @Test
     @DisplayName("Введена некорректная строка 2")
-    void enteredIncorrectString2() {
+    void clusterizeWhenEnteredIncorrectStringThenNull2() {
         //given
         String input = "(";
 
@@ -50,7 +50,7 @@ public class Task2Test {
 
     @Test
     @DisplayName("Введена некорректная строка 3")
-    void enteredIncorrectString3() {
+    void clusterizeWhenEnteredIncorrectStringThenNull3() {
         //given
         String input = "(())())";
 
@@ -62,8 +62,8 @@ public class Task2Test {
     }
 
     @Test
-    @DisplayName("Лишние символы")
-    void extraChars() {
+    @DisplayName("Введена строка, содержащая лишние символы")
+    void clusterizeWhenEnteredStringWithExtraCharsThenNull() {
         //given
         String input = "a((aa))(a)a";
 
@@ -75,8 +75,8 @@ public class Task2Test {
     }
 
     @Test
-    @DisplayName("Пустая строка")
-    void emptyString() {
+    @DisplayName("Введена пустая строка")
+    void clusterizeWhenEnteredEmptyStringThenNull() {
         //given
         String input = "";
 

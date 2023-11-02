@@ -11,7 +11,7 @@ public class Task6Test {
 
     @Test
     @DisplayName("Тестирование работы биржи")
-    void test(){
+    void tinkoffInvestmentsSimpleTest(){
         //given
         Stock st1 = new Stock("Apple", 123);
         Stock st2 = new Stock("Microsoft", 321);

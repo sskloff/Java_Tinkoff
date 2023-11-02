@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Task5Test {
     @Test
     @DisplayName("Отработка метода по ASC")
-    void ascTest() {
+    void parseContactsWithASC() {
         //given
         List<String> names = Arrays.asList("Ivan Ivanov", "Ivashka", "Anton Stepanenko",
             "Krishtianu Siuualdo", "Sheldon Cooper", "Rubashka");
@@ -33,7 +33,7 @@ public class Task5Test {
 
     @Test
     @DisplayName("Отработка метода по DESC")
-    void descTest() {
+    void parseContactsWithDESC() {
         //given
         List<String> names = Arrays.asList("Ivan Ivanov", "Ivashka", "Anton Stepanenko",
             "Krishtianu Siuualdo", "Sheldon Cooper", "Rubashka");
@@ -51,8 +51,8 @@ public class Task5Test {
     }
 
     @Test
-    @DisplayName("Пустой лист")
-    void emptyList() {
+    @DisplayName("Введен пустой лист")
+    void enteredEmptyListThenReturnsEmptyList() {
         //given
         List<String> names = new ArrayList<>();
 

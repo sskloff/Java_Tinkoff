@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task1Test {
     @Test
-    @DisplayName("Тестирование отработки метода")
-    void test() {
+    @DisplayName("Отработки шифрования методом Атбаша")
+    void atbashCipherSimpleTest() {
         //given
         String str = "AbC12ZX";
 
@@ -19,8 +19,8 @@ public class Task1Test {
     }
 
     @Test
-    @DisplayName("Пустая строка")
-    void emptyString() {
+    @DisplayName("Отработка метода при вводе пустой строки")
+    void atbashCipherEnteredEmptyStringThenReturnsEmptyString() {
         //given
         String str = "";
 

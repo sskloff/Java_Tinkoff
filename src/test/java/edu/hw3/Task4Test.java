@@ -9,7 +9,7 @@ public class Task4Test {
 
     @Test
     @DisplayName("Отработка метода на 3")
-    void testOn3() {
+    void whenConvertToRoman3ThenIII() {
         //when
         String answer = Task4.convertToRoman(3);
 
@@ -19,7 +19,7 @@ public class Task4Test {
 
     @Test
     @DisplayName("Отработка метода на 9")
-    void testOn9() {
+    void whenConvertToRoman9ThenIX() {
         //when
         String answer = Task4.convertToRoman(9);
 
@@ -29,7 +29,7 @@ public class Task4Test {
 
     @Test
     @DisplayName("Отработка метода на 98")
-    void testOn98() {
+    void whenConvertToRoman98ThenXCVIII() {
         //when
         String answer = Task4.convertToRoman(98);
 
@@ -39,7 +39,7 @@ public class Task4Test {
 
     @Test
     @DisplayName("Отработка метода на 55")
-    void testOn55() {
+    void whenConvertToRoman55ThenLV() {
         //when
         String answer = Task4.convertToRoman(55);
 
@@ -49,7 +49,7 @@ public class Task4Test {
 
     @Test
     @DisplayName("Отработка метода на 614")
-    void testOn614() {
+    void whenConvertToRoman614ThenDCXIV() {
         //when
         String answer = Task4.convertToRoman(614);
 
@@ -59,7 +59,7 @@ public class Task4Test {
 
     @Test
     @DisplayName("Отработка метода на 2000")
-    void testOn2000() {
+    void whenConvertToRoman2000ThenMM() {
         //when
         String answer = Task4.convertToRoman(2000);
 
@@ -69,7 +69,7 @@ public class Task4Test {
 
     @Test
     @DisplayName("Отработка метода на 3636")
-    void testOn3636() {
+    void whenConvertToRoman3636ThenMMMDCXXXVI() {
         //when
         String answer = Task4.convertToRoman(3636);
 
@@ -78,8 +78,8 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("Значение вне заданного промежутка")
-    void illegalArgumentTest() {
+    @DisplayName("Передано значение вне заданного промежутка")
+    void whenConvertToRomanIllegalArgumentThenThrowException() {
         Assertions.assertThatThrownBy(() -> Task4.convertToRoman(-2))
             .isInstanceOf(IllegalArgumentException.class);
     }

@@ -9,7 +9,7 @@ public class Task7Test {
 
     @Test
     @DisplayName("Null помещается в дерево")
-    void comparatorTest() {
+    void nullPlacedOnATree() {
         //given
         TreeMap<String, String> tree = new TreeMap<>(new Task7<>());
 
