@@ -224,7 +224,7 @@ public class TasksTest {
 
     @Test
     @DisplayName("Суммарный вес животных каждого вида от 1 до 11 лет")
-    void whenFindTotalWeightBySpeciesFrom1to11AgesThendDogSumIs15() {
+    void whenFindTotalWeightBySpeciesFrom1to11AgesThenDogSumIs15() {
         //given
         List<Animal> animals = createCollection();
 
@@ -277,7 +277,7 @@ public class TasksTest {
     }
 
     @Test
-    @DisplayName("Самая тяжелая рыба")
+    @DisplayName("Вернуть имя и множество ошибок некорректных записей")
     void whenFindErrorsInAnimalsExemplarsThenSizeOfErrorsSetIs2() {
         //given
         List<Animal> animals = createCollectionForLastTasks();
@@ -290,7 +290,7 @@ public class TasksTest {
     }
 
     @Test
-    @DisplayName("Самая тяжелая рыба")
+    @DisplayName("Преобразование множества ошибок из прошлого задания в строку")
     void getErrorsInMoreReadableForm() {
         //given
         List<Animal> animals = createCollectionForLastTasks();
