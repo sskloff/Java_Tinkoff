@@ -52,7 +52,7 @@ public class SolverDFS implements Solver {
             );
             List<int[]> directions = new ArrayList<>();
             if (unvisitedDirections != null) {
-                directions = getAvailableDirections(current, unvisitedDirections);
+                directions = getAvailableDirections(current, unvisitedDirections, grid);
             }
             if (!directions.isEmpty()) {
                 stack.push(current);
@@ -67,8 +67,8 @@ public class SolverDFS implements Solver {
         return stack;
     }
 
-    private List<int[]> getAvailableDirections(
-        Coordinate current, List<int[]> unvisitedDirections
+    public static List<int[]> getAvailableDirections(
+        Coordinate current, List<int[]> unvisitedDirections, Cell[][] grid
     ) {
         List<int[]> directions = new ArrayList<>();
         int row = current.row();

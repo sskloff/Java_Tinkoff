@@ -1,6 +1,7 @@
 package edu.project2;
 
 import edu.project2.generators.GeneratorDFS;
+import edu.project2.solvers.SolverBFS;
 import edu.project2.solvers.SolverDFS;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -65,10 +66,28 @@ public class MazeTest {
 
     @Test
     @DisplayName("Нахождение пути через SolverDFS и его отрисовка")
-    void prettyPathShouldBeEqualToPreparedPathRender() {
+    void prettyPathByDFSShouldBeEqualToPreparedPathRender() {
         //given
         Maze maze = prepareMaze();
         SolverDFS solver = new SolverDFS(maze);
+        String[][] preparedRender = preparePathRender();
+
+        //when
+        Stack<Coordinate> stack = solver.solve(
+            new Coordinate(0, 0), new Coordinate(2, 1)
+        );
+        String[][] prettyPath = Renderer.renderPath(maze, stack);
+
+        //then
+        assertThat(prettyPath).isEqualTo(preparedRender);
+    }
+
+    @Test
+    @DisplayName("Нахождение пути через SolverBFS и его отрисовка")
+    void prettyPathByBFSShouldBeEqualToPreparedPathRender() {
+        //given
+        Maze maze = prepareMaze();
+        SolverBFS solver = new SolverBFS(maze);
         String[][] preparedRender = preparePathRender();
 
         //when
