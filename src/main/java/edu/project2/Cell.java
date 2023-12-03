@@ -7,19 +7,6 @@ public class Cell {
     private boolean left;
 
     public Cell() {
-        this.bottom = false;
-        this.top = false;
-        this.right = false;
-        this.left = false;
-    }
-
-    public static Cell fabricCellCreator(boolean bottom, boolean top, boolean right, boolean left) {
-        Cell cell = new Cell();
-        cell.setRight(right);
-        cell.setLeft(left);
-        cell.setBottom(bottom);
-        cell.setTop(top);
-        return cell;
     }
 
     public void setBottom(boolean bottom) {

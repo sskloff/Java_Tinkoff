@@ -14,20 +14,15 @@ public class SolverBFS implements Solver {
     private final int width;
     private final int height;
     private final Cell[][] grid;
-    Boolean[][] visited;
+    boolean[][] visited;
     Coordinate[][] previousPositions;
 
     public SolverBFS(Maze maze) {
         this.width = maze.width();
         this.height = maze.height();
         this.grid = maze.grid();
-        visited = new Boolean[maze.height()][maze.width()];
+        visited = new boolean[maze.height()][maze.width()];
         previousPositions = new Coordinate[maze.height()][maze.width()];
-        for (int i = 0; i < maze.height(); i++) {
-            for (int j = 0; j < maze.width(); j++) {
-                visited[i][j] = false;
-            }
-        }
     }
 
     @Override

@@ -15,18 +15,13 @@ public class SolverDFS implements Solver {
     private final int height;
     private final Cell[][] grid;
     public final Random random = new Random();
-    Boolean[][] visited;
+    boolean[][] visited;
 
     public SolverDFS(Maze maze) {
         this.width = maze.width();
         this.height = maze.height();
         this.grid = maze.grid();
-        visited = new Boolean[maze.height()][maze.width()];
-        for (int i = 0; i < maze.height(); i++) {
-            for (int j = 0; j < maze.width(); j++) {
-                visited[i][j] = false;
-            }
-        }
+        visited = new boolean[maze.height()][maze.width()];
     }
 
     @Override
