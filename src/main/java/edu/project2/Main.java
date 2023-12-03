@@ -61,6 +61,8 @@ public class Main {
             }
             System.out.println();
         }
+
+        scanner.close();
     }
 
     private static Coordinate inputCoordinate() {
