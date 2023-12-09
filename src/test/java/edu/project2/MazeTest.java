@@ -1,6 +1,8 @@
 package edu.project2;
 
 import edu.project2.generators.GeneratorDFS;
+import edu.project2.solvers.MultiThreadSolver;
+import edu.project2.solvers.Solver;
 import edu.project2.solvers.SolverBFS;
 import edu.project2.solvers.SolverDFS;
 import org.junit.jupiter.api.DisplayName;
@@ -88,6 +90,24 @@ public class MazeTest {
         //given
         Maze maze = prepareMaze();
         SolverBFS solver = new SolverBFS(maze);
+        String[][] preparedRender = preparePathRender();
+
+        //when
+        Stack<Coordinate> stack = solver.solve(
+            new Coordinate(0, 0), new Coordinate(2, 1)
+        );
+        String[][] prettyPath = Renderer.renderPath(maze, stack);
+
+        //then
+        assertThat(prettyPath).isEqualTo(preparedRender);
+    }
+
+    @Test
+    @DisplayName("Нахождение пути через MultiThreadSolver и его отрисовка")
+    void prettyPathByMultiThreadShouldBeEqualToPreparedPathRender() {
+        //given
+        Maze maze = prepareMaze();
+        Solver solver = new MultiThreadSolver(maze);
         String[][] preparedRender = preparePathRender();
 
         //when
