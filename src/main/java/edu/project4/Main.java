@@ -51,27 +51,28 @@ public class Main {
 
         deleteIfExists(SINGLE_IMAGE_PATH);
         deleteIfExists(MULTI_IMAGE_PATH);
-        BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+        BufferedImage singleImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+        BufferedImage multiImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+        FractalFlame fractalFlame = new FractalFlame(WIDTH, HEIGHT, linearVariations, nonlinearVariations);
 
         //Отрисовка фрактального пламени в однопотоке
         long before = System.nanoTime();
-        Pixel[][] pixels = FractalFlame.createWithSingleThread(WIDTH, HEIGHT,
-        linearVariations, nonlinearVariations, ITERATIONS);
+        Pixel[][] pixels = fractalFlame.createWithSingleThread(ITERATIONS);
         long after = System.nanoTime();
         long singleThreadSolutionTime = after - before;
         System.out.println("Single thread: " + singleThreadSolutionTime);
         ImageUtils.correctGamma(pixels, GAMMA);
-        ImageUtils.generateImage(image, pixels);
-        ImageUtils.saveImage(image, SINGLE_IMAGE_PATH, ImageFormat.PNG);
+        ImageUtils.generateImage(singleImage, pixels);
+        ImageUtils.saveImage(singleImage, SINGLE_IMAGE_PATH, ImageFormat.PNG);
 
-//        //Отрисовка фрактального пламени в многопотоке
-//        before = System.nanoTime();
-//        Pixel[][] pixels2 = fractalFlame.createWithMultiThread(ITERATIONS);
-//        after = System.nanoTime();
-//        long multiThreadSolutionTime = after - before;
-//        System.out.println("Multi thread: " + multiThreadSolutionTime);
-//        ImageUtils.correctGamma(pixels2, GAMMA);
-//        ImageUtils.generateImage(image2, pixels);
-//        ImageUtils.saveImage(image2, MULTI_IMAGE_PATH, ImageFormat.PNG);
+        //Отрисовка фрактального пламени в многопотоке
+        before = System.nanoTime();
+        Pixel[][] pixels2 = fractalFlame.createWithMultiThread(ITERATIONS);
+        after = System.nanoTime();
+        long multiThreadSolutionTime = after - before;
+        System.out.println("Multi thread: " + multiThreadSolutionTime);
+        ImageUtils.correctGamma(pixels2, GAMMA);
+        ImageUtils.generateImage(multiImage, pixels);
+        ImageUtils.saveImage(multiImage, MULTI_IMAGE_PATH, ImageFormat.PNG);
     }
 }
