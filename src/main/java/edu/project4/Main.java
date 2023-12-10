@@ -13,6 +13,9 @@ import static java.nio.file.Files.deleteIfExists;
 
 public class Main {
 
+    private Main() {
+    }
+
     private static final Path SINGLE_IMAGE_PATH = Path.of("src/main/java/edu/project4/single.png");
     private static final Path MULTI_IMAGE_PATH = Path.of("src/main/java/edu/project4/multi.png");
     private static final double GAMMA = 1.5;
@@ -22,7 +25,7 @@ public class Main {
     private static final int LINEAR_VARIATIONS_COUNT = 100;
     private static final Random RANDOM = new Random();
 
-
+    @SuppressWarnings("RegexpSinglelineJava")
     public static void main(String[] args) throws IOException {
         //Создание линейных преобразований
         ArrayList<LinearVariation> linearVariations = new ArrayList<>();

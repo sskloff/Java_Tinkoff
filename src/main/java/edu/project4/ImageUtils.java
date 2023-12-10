@@ -2,12 +2,12 @@ package edu.project4;
 
 import edu.project4.Models.ImageFormat;
 import edu.project4.Models.Pixel;
-import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import javax.imageio.ImageIO;
 
 public final class ImageUtils {
 
@@ -30,8 +30,8 @@ public final class ImageUtils {
             for (int col = 0; col < pixels[0].length; col++) {
                 pixel[col].setNormal(pixel[col].getNormal() / max);
                 pixel[col].setRed(
-                    pixel[col].getRed() * Math.pow(pixel[col].getNormal(), (1.0 / gamma)))
-                ;
+                    pixel[col].getRed() * Math.pow(pixel[col].getNormal(), (1.0 / gamma))
+                );
                 pixel[col].setGreen(
                     pixel[col].getGreen() * Math.pow(pixel[col].getNormal(), (1.0 / gamma))
                 );
@@ -42,6 +42,7 @@ public final class ImageUtils {
         }
     }
 
+    @SuppressWarnings("MagicNumber")
     public static void generateImage(BufferedImage image, Pixel[][] pixels) {
         for (int i = 0; i < pixels.length; i++) {
             for (int j = 0; j < pixels[0].length; j++) {

@@ -9,6 +9,10 @@ import java.util.Random;
 
 public class FractalFlame {
 
+    private FractalFlame() {
+
+    }
+
     private static final Random RANDOM = new Random();
 
     public static Pixel[][] createWithSingleThread(int width, int height,
