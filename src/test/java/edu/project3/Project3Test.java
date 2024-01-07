@@ -57,7 +57,7 @@ public class Project3Test {
         List<String> logs = LogLoader.getLogFromFile(FILE_PATH);
 
         //then
-        assertEquals(logs, LOGS);
+        assertEquals(LOGS, logs);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class Project3Test {
         List<String> logs = LogLoader.getLogFromURL(URL);
 
         //then
-        assertEquals(logs.size(), 51462);
+        assertEquals(51462, logs.size());
     }
 
     @Test
@@ -81,12 +81,12 @@ public class Project3Test {
         Log parsedLog = LogParser.parseLog(log);
 
         //then
-        assertEquals(parsedLog.remoteAddress(), "72.32.152.84");
-        assertEquals(parsedLog.timeLocal(),
-            OffsetDateTime.parse("03/Jun/2015:06:06:24 +0000", formatter));
-        assertEquals(parsedLog.method(), "GET");
-        assertEquals(parsedLog.status(), 304);
-        assertEquals(parsedLog.httpUserAgent(), "Debian APT-HTTP/1.3 (0.9.7.9)");
+        assertEquals("72.32.152.84", parsedLog.remoteAddress());
+        assertEquals(OffsetDateTime.parse("03/Jun/2015:06:06:24 +0000", formatter),
+            parsedLog.timeLocal());
+        assertEquals("GET", parsedLog.method());
+        assertEquals(304, parsedLog.status());
+        assertEquals("Debian APT-HTTP/1.3 (0.9.7.9)", parsedLog.httpUserAgent());
     }
 
     @Test
@@ -112,11 +112,11 @@ public class Project3Test {
         Report report = Report.createLogReport(logAnalyzer, parsedLogs);
 
         //then
-        assertEquals(report.getResponseCodes().get(200), 1);
-        assertEquals(report.getResponseCodes().get(404), 1);
-        assertEquals(report.getMethods().get("GET"), 2);
+        assertEquals(1, report.getResponseCodes().get(200));
+        assertEquals(1, report.getResponseCodes().get(404));
+        assertEquals(2, report.getMethods().get("GET"));
         assertNull(report.getMethods().get("DELETE")); // лог не вошел в диапазон по датам
-        assertEquals(report.getRemoteAddresses().get("54.208.16.21"), 1);
-        assertEquals(report.getAverageResponseSize(), 2000);
+        assertEquals(1, report.getRemoteAddresses().get("54.208.16.21"));
+        assertEquals(2000, report.getAverageResponseSize());
     }
 }
