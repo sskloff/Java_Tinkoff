@@ -53,7 +53,8 @@ public class Main {
         deleteIfExists(MULTI_IMAGE_PATH);
         BufferedImage singleImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         BufferedImage multiImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-        FractalFlame fractalFlame = new FractalFlame(WIDTH, HEIGHT, linearVariations, nonlinearVariations);
+        FractalFlame fractalFlame = FractalFlame.createFractalFlame(
+            WIDTH, HEIGHT, linearVariations, nonlinearVariations);
 
         //Отрисовка фрактального пламени в однопотоке
         long before = System.nanoTime();

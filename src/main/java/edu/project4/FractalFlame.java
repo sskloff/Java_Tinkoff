@@ -14,34 +14,40 @@ public class FractalFlame {
 
     private static final Random RANDOM = new Random();
     private static final int CORES = 4;
-    private final int width;
-    private final int height;
-    private final double rowMax;
-    private final double rowMin;
-    private final double colMax;
-    private final double colMin;
-    private final Pixel[][] pixels;
-    private final ArrayList<LinearVariation> linearVariations;
-    private final ArrayList<NonlinearVariations> nonlinearVariations;
+    private int width;
+    private int height;
+    private double rowMax;
+    private double rowMin;
+    private double colMax;
+    private double colMin;
+    private Pixel[][] pixels;
+    private ArrayList<LinearVariation> linearVariations;
+    private ArrayList<NonlinearVariations> nonlinearVariations;
 
-    public FractalFlame(int width, int height,
+    public FractalFlame() {
+    }
+
+    public static FractalFlame createFractalFlame(
+        int width, int height,
         ArrayList<LinearVariation> linearVariations, ArrayList<NonlinearVariations> nonlinearVariations
     ) {
-        this.width = width;
-        this.height = height;
-        this.linearVariations = linearVariations;
-        this.nonlinearVariations = nonlinearVariations;
-        this.rowMax = (double) width / height;
-        this.rowMin = -(double) width / height;
-        this.colMax = 1.0;
-        this.colMin = -1.0;
+        FractalFlame flame = new FractalFlame();
+        flame.width = width;
+        flame.height = height;
+        flame.linearVariations = linearVariations;
+        flame.nonlinearVariations = nonlinearVariations;
+        flame.rowMax = (double) width / height;
+        flame.rowMin = -(double) width / height;
+        flame.colMax = 1.0;
+        flame.colMin = -1.0;
         Pixel[][] pixelsMatrix = new Pixel[width][height];
         for (int i = 0; i < pixelsMatrix.length; i++) {
             for (int j = 0; j < pixelsMatrix[0].length; j++) {
                 pixelsMatrix[i][j] = new Pixel(0.0, 0.0, 0.0, 0, 0.0);
             }
         }
-        this.pixels = pixelsMatrix;
+        flame.pixels = pixelsMatrix;
+        return flame;
     }
 
     public Pixel[][] createWithSingleThread(int iterationsCount) {
