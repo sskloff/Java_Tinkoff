@@ -1,6 +1,7 @@
 package edu.project2;
 
 import edu.project2.generators.GeneratorDFS;
+import edu.project2.solvers.MultiThreadSolver;
 import edu.project2.solvers.Solver;
 import edu.project2.solvers.SolverBFS;
 import edu.project2.solvers.SolverDFS;
@@ -25,6 +26,7 @@ public class Main {
         Maze maze = generator.generateMaze();
         Solver solverDFS = new SolverDFS(maze);
         Solver solverBFS = new SolverBFS(maze);
+        Solver multiThreadSolver = new MultiThreadSolver(maze);
         Coordinate start;
         Coordinate end;
 
@@ -54,6 +56,17 @@ public class Main {
         //when
         System.out.println("\n");
         stack = solverDFS.solve(start, end);
+        prettyPath = Renderer.renderPath(maze, stack);
+        for (String[] s : prettyPath) {
+            for (String s1 : s) {
+                System.out.print(s1);
+            }
+            System.out.println();
+        }
+
+        //when
+        System.out.println("\n");
+        stack = multiThreadSolver.solve(start, end);
         prettyPath = Renderer.renderPath(maze, stack);
         for (String[] s : prettyPath) {
             for (String s1 : s) {

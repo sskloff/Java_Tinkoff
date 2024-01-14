@@ -61,7 +61,7 @@ public class SolverBFS implements Solver {
         return stack;
     }
 
-    public Stack<Coordinate> reverseStack(Stack<Coordinate> stack) {
+    public static Stack<Coordinate> reverseStack(Stack<Coordinate> stack) {
         Queue<Coordinate> queue = new LinkedList<>();
         while (!stack.isEmpty()) {
             queue.add(stack.pop());
