@@ -16,15 +16,15 @@ public class MazeTest {
 
     public static Maze prepareMaze() {
         Cell[][] grid = new Cell[3][3];
-        grid[0][0] = FabricCellCreator.fabricCellCreator(false, false, true, false);
-        grid[0][1] = FabricCellCreator.fabricCellCreator(false, false, true, true);
-        grid[0][2] = FabricCellCreator.fabricCellCreator(true, false, false, true);
-        grid[1][0] = FabricCellCreator.fabricCellCreator(true, false, true, false);
-        grid[1][1] = FabricCellCreator.fabricCellCreator(false, false, true, true);
-        grid[1][2] = FabricCellCreator.fabricCellCreator(false, true, false, true);
-        grid[2][0] = FabricCellCreator.fabricCellCreator(false, true, true, false);
-        grid[2][1] = FabricCellCreator.fabricCellCreator(false, false, true, true);
-        grid[2][2] = FabricCellCreator.fabricCellCreator(false, false, false, true);
+        grid[0][0] = FabricCellCreator.createCell(false, false, true, false);
+        grid[0][1] = FabricCellCreator.createCell(false, false, true, true);
+        grid[0][2] = FabricCellCreator.createCell(true, false, false, true);
+        grid[1][0] = FabricCellCreator.createCell(true, false, true, false);
+        grid[1][1] = FabricCellCreator.createCell(false, false, true, true);
+        grid[1][2] = FabricCellCreator.createCell(false, true, false, true);
+        grid[2][0] = FabricCellCreator.createCell(false, true, true, false);
+        grid[2][1] = FabricCellCreator.createCell(false, false, true, true);
+        grid[2][2] = FabricCellCreator.createCell(false, false, false, true);
         return new Maze(3, 3, grid);
     }
 
