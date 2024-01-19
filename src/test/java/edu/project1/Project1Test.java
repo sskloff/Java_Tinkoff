@@ -30,8 +30,8 @@ public class Project1Test {
         // then
         assertEquals("алгебра", testGame.guessedWord); // Изменение состояния отгаданного слова
         assertEquals(6, testGame.usedChar.size()); // Расширение использованных букв
-        assertEquals(TurnResult.letterOpens, turnResult);
-        assertEquals(GameResult.win, gameResult);
+        assertEquals(TurnResult.LETTER_OPENS, turnResult);
+        assertEquals(GameResult.WIN, gameResult);
     }
 
     @Test
@@ -56,8 +56,8 @@ public class Project1Test {
         GameResult gameResult = Game.turnResult(testGame);
         // then
         assertEquals("а****а**", testGame.guessedWord);
-        assertEquals(TurnResult.wrongLetterEntered, turnResult);
-        assertEquals(GameResult.lose, gameResult);
+        assertEquals(TurnResult.WRONG_LETTER_ENTERED, turnResult);
+        assertEquals(GameResult.LOSE, gameResult);
 
         // when
         testGame = new Game(dictionary);
@@ -79,40 +79,40 @@ public class Project1Test {
         TurnResult turnResult = Game.guessChar(testGame, 'с');
         GameResult gameResult = Game.turnResult(testGame);
         // then
-        assertEquals(TurnResult.letterOpens, turnResult);
-        assertEquals(GameResult.gameContinues, gameResult);
+        assertEquals(TurnResult.LETTER_OPENS, turnResult);
+        assertEquals(GameResult.GAME_CONTINUES, gameResult);
 
 
         // when
         turnResult = Game.guessChar(testGame, 'т');
         gameResult = Game.turnResult(testGame);
         // then
-        assertEquals(TurnResult.letterOpens, turnResult);
-        assertEquals(GameResult.gameContinues, gameResult);
+        assertEquals(TurnResult.LETTER_OPENS, turnResult);
+        assertEquals(GameResult.GAME_CONTINUES, gameResult);
 
 
         // when
         turnResult = Game.guessChar(testGame, 'е');
         gameResult = Game.turnResult(testGame);
         // then
-        assertEquals(TurnResult.wrongLetterEntered, turnResult);
-        assertEquals(GameResult.gameContinues, gameResult);
+        assertEquals(TurnResult.WRONG_LETTER_ENTERED, turnResult);
+        assertEquals(GameResult.GAME_CONTINUES, gameResult);
 
 
         // when
         turnResult = Game.guessChar(testGame, 'о');
         gameResult = Game.turnResult(testGame);
         // then
-        assertEquals(TurnResult.letterOpens, turnResult);
-        assertEquals(GameResult.gameContinues, gameResult);
+        assertEquals(TurnResult.LETTER_OPENS, turnResult);
+        assertEquals(GameResult.GAME_CONTINUES, gameResult);
 
 
         // when
         turnResult = Game.guessChar(testGame, 'п');
         gameResult = Game.turnResult(testGame);
         // then
-        assertEquals(TurnResult.letterOpens, turnResult);
-        assertEquals(GameResult.win, gameResult);
+        assertEquals(TurnResult.LETTER_OPENS, turnResult);
+        assertEquals(GameResult.WIN, gameResult);
         assertEquals("стоп", testGame.guessedWord); // Изменение состояния отгаданного слова
         assertEquals(5, testGame.usedChar.size()); // Расширение использованных букв
     }
@@ -130,6 +130,6 @@ public class Project1Test {
         TurnResult turnResult = Game.guessChar(testGame, '#');
 
         // then
-        assertEquals(TurnResult.gameInterrupted, turnResult);
+        assertEquals(TurnResult.GAME_INTERRUPTED, turnResult);
     }
 }

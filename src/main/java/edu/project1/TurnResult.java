@@ -1,9 +1,9 @@
 package edu.project1;
 
 public enum TurnResult {
-    letterWasGuessedPreviously,
-    letterOpens,
-    wrongLetterWasEnteredPreviously,
-    wrongLetterEntered,
-    gameInterrupted
+    LETTER_WAS_GUESSED_PREVIOUSLY,
+    LETTER_OPENS,
+    WRONG_LETTER_WAS_ENTERED_PREVIOUSLY,
+    WRONG_LETTER_ENTERED,
+    GAME_INTERRUPTED
 }
