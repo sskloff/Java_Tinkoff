@@ -53,25 +53,25 @@ public class Game {
     @SuppressWarnings("ReturnCount")
     public static TurnResult guessChar(Game thisGame, char input) {
         if (input == '#') {
-            return TurnResult.gameInterrupted;
+            return TurnResult.GAME_INTERRUPTED;
         }
         if (thisGame.hiddenWord.contains(String.valueOf(input))) {
             if (thisGame.usedChar.contains(input)) {
-                return TurnResult.letterWasGuessedPreviously;
+                return TurnResult.LETTER_WAS_GUESSED_PREVIOUSLY;
             } else {
                 thisGame.guessedWord = openChar(thisGame, input);
                 if (!thisGame.guessedWord.contains("*")) {
                     thisGame.winnerStatus = true;
                 }
-                return TurnResult.letterOpens;
+                return TurnResult.LETTER_OPENS;
             }
         } else {
             if (thisGame.usedChar.contains(input)) {
-                return TurnResult.wrongLetterWasEnteredPreviously;
+                return TurnResult.WRONG_LETTER_WAS_ENTERED_PREVIOUSLY;
             } else {
                 thisGame.usedChar.add(input);
                 thisGame.mistakeCount++;
-                return TurnResult.wrongLetterEntered;
+                return TurnResult.WRONG_LETTER_ENTERED;
             }
         }
     }
@@ -80,11 +80,11 @@ public class Game {
         thisGame.gallows = Gallows.valueOf(STEPS[thisGame.mistakeCount]);
         if (thisGame.mistakeCount == MISTAKE_MAX) {
             thisGame.winnerStatus = true;
-            return GameResult.lose;
+            return GameResult.LOSE;
         } else if (thisGame.winnerStatus) {
-            return GameResult.win;
+            return GameResult.WIN;
         }
-        return GameResult.gameContinues;
+        return GameResult.GAME_CONTINUES;
     }
 
     @SuppressWarnings("RegexpSinglelineJava")
@@ -101,19 +101,19 @@ public class Game {
             System.out.print("Введите букву: ");
             char input = Main.input();
             turnResult = guessChar(thisGame, input);
-            if (turnResult.equals(TurnResult.gameInterrupted)) {
+            if (turnResult.equals(TurnResult.GAME_INTERRUPTED)) {
                 System.exit(0);
             }
-            if (turnResult.equals(TurnResult.letterWasGuessedPreviously)) {
+            if (turnResult.equals(TurnResult.LETTER_WAS_GUESSED_PREVIOUSLY)) {
                 System.out.println("\nРанее Вы уже угадывали эту буквы");
-            } else if (turnResult.equals(TurnResult.wrongLetterWasEnteredPreviously)) {
+            } else if (turnResult.equals(TurnResult.WRONG_LETTER_WAS_ENTERED_PREVIOUSLY)) {
                 System.out.println("\nБезумие - это повторение одних и тех же действий "
                     + "раз за разом, в надежде на изменение :^)");
             }
             gameStatus = turnResult(thisGame);
-            if (gameStatus.equals(GameResult.win)) {
+            if (gameStatus.equals(GameResult.WIN)) {
                 System.out.println("\nВЫ ВЫИГРАЛИ!!!\n");
-            } else if (gameStatus.equals(GameResult.lose)) {
+            } else if (gameStatus.equals(GameResult.LOSE)) {
                 System.out.println(thisGame.gallows);
                 System.out.println("Поздравляем! Вы - вишня :^)");
                 System.out.println("Было загадано слово " + thisGame.hiddenWord + "\n");

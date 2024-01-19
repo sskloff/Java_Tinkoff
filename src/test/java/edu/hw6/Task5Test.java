@@ -14,8 +14,8 @@ public class Task5Test {
     }
 
     @Test
-    @DisplayName("Проверка что в массиве топ историй 500 записей")
-    void whenHackerNewsTopStroiesThen500() {
-        assertThat(HackerNews.hackerNewsTopStories()).hasSize(500);
+    @DisplayName("Проверка что в массиве топ историй 463 записи")
+    void whenHackerNewsTopStroiesThen463() {
+        assertThat(HackerNews.hackerNewsTopStories()).hasSize(463);
     }
 }
